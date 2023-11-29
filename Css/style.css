@@ -48,13 +48,14 @@ ul {
 .cards__inner {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around; /* Alineación horizontal centrada */
   gap: 2.5em;
 }
 
 .card {
   --flow-space: 0.5em;
   --hsl: var(--hue), var(--saturation), var(--lightness);
-  flex: 1 1 14rem;
+  flex: 1 1 calc(33.33% - 20px); /* Ancho de cada carta */
   padding: 1.5em 2em;
   display: grid;
   grid-template-rows: auto auto auto 1fr;
@@ -66,22 +67,15 @@ ul {
   border-radius: 15px;
 }
 
-.card:nth-child(1) {
-  --hue: 165;
-  --saturation: 82.26%;
-  --lightness: 51.37%;
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
-.card:nth-child(2) {
-  --hue: 291.34;
-  --saturation: 95.9%;
-  --lightness: 61.76%;
-}
-
-.card:nth-child(3) {
-  --hue: 338.69;
-  --saturation: 100%;
-  --lightness: 48.04%;
+.card__heading {
+  font-size: 1.05em;
+  font-weight: 600;
 }
 
 .card__bullets {
@@ -91,13 +85,8 @@ ul {
 .card__bullets li::before {
   display: inline-block;
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' title='check' fill='%23dddddd'%3E%3Cpath d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z' /%3E%3C/svg%3E");
-  transform: translatey(0.25ch);
+  transform: translateY(0.25ch);
   margin-right: 1ch;
-}
-
-.card__heading {
-  font-size: 1.05em;
-  font-weight: 600;
 }
 
 .card__price {
@@ -111,7 +100,7 @@ ul {
 
 .cta {
   display: block;
-  align-self: end;
+  align-self: flex-end;
   margin: 1em 0 0.5em 0;
   text-align: center;
   text-decoration: none;
@@ -129,12 +118,8 @@ ul {
   pointer-events: none;
   user-select: none;
   opacity: var(--opacity, 0);
-  -webkit-mask: radial-gradient(25rem 25rem at var(--x) var(--y),
-      #000 1%,
-      transparent 50%);
-  mask: radial-gradient(25rem 25rem at var(--x) var(--y),
-      #000 1%,
-      transparent 50%);
+  -webkit-mask: radial-gradient(25rem 25rem at var(--x) var(--y), #000 1%, transparent 50%);
+  mask: radial-gradient(25rem 25rem at var(--x) var(--y), #000 1%, transparent 50%);
   transition: 400ms mask ease;
   will-change: mask;
 }
@@ -162,7 +147,6 @@ ul {
   --lightness: 95%;
   background: hsla(var(--hsl), 0.1);
 }
-
 
 /* 10 */
 .btn-10 {
@@ -281,4 +265,17 @@ nav a:nth-child(4) {
 nav a:hover {
   border-top: 5px solid #4a4a4a;
   transition: .4s;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2.5em;
+}
+
+.cards__card {
+    flex: 1 1 calc(33.33% - 20px);
+    max-width: 300px; /* Puedes ajustar el ancho máximo según tus necesidades */
+    margin: 0 auto; /* Centrar la carta dentro del contenedor */
 }

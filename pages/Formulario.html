@@ -5,28 +5,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario</title>
-  <link rel="stylesheet" href="../Css/formulario.css">
+  <link rel="stylesheet" href="../Css/Formularioprueba.css">
 </head>
 
 <body>
-  <div class="container">
-    <form id="formpj">
-      <h3>Formulario para crear la tarjeta de su personaje</h3>
-      
-      <input type="text" name="nombre" placeholder="Nombre del personaje a crear" required>
-      <input name="cara1" type="text" placeholder="Mencione una caracteristica de su personaje" required>
-      <input type="text"  name ="cara2" placeholder="Mencione otra caracteristica de su personaje" required>
-      <input type="text" name="cara3" placeholder="Mencione otra caracteristica de su personaje" required>
-      <input type="url" name="imagen"placeholder="Coloque la imagen del personaje que quiere ver en la tarjeta" required>
-      <center>
-        <button class="custom-btn btn-12" type="submit">
-          <span>Submit</span>
-          <span>Click!</span>
-        </button>
-      </center>
-    </form>
-  </div>
-  <script src="../Javas/formulario.js"></script>
-</body>
+  <div class="login-box">
+    <h2>Formulario para crear la tarjeta de su personaje</h2>
+    <div class="container">
+      <form id="miFormulario">
 
-</html>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre del personaje a crear" required>
+
+        <input type="number" id="vida" name="vida" placeholder="Ponga en numeros la vida de su personaje" required>
+
+        <label for="cara1">Caracteristica 1:</label>
+        <input type="number" id="cara1" name="cara1" placeholder="Ponga en numeros el daño de ataque de su personaje"
+          required>
+
+        <label for="cara2">Caracteristica 2:</label>
+        <input type="number" id="cara2" name="cara2"
+          placeholder="Ponga en numeros la velocidad de movimiento de su personaje" required>
+
+        <label for="cara3">Caracteristica 3:</label>
+        <input type="number" id="cara3" name="cara3"
+          placeholder="Ponga en numeros el tamaño de unidades de su personaje" required>
+
+        <label for="imagen">URL de la imagen:</label>
+        <input type="url" id="imagen" name="imagen"
+          placeholder="Coloque la imagen del personaje que quiere ver en la tarjeta" required>
+         <center>
+                 <button class="custom-btn btn-12" type="submit">
+                   <span>Submit</span>
+                   <span>Click!</span>
+                 </button>
+               </center>
+             </form>
+           </div>
+
+           <script>
+             document.getElementById("miFormulario").addEventListener("submit", function (event) {
+               event.preventDefault();
+
+               // Obtener los valores del formulario
+               const nombre = document.getElementById("nombre").value;
+               const imagen = document.getElementById("imagen").value;
+               const vida = document.getElementById("vida").value;
+               const cara1 = document.getElementById("cara1").value;
+               const cara2 = document.getElementById("cara2").value;
+               const cara3 = document.getElementById("cara3").value;
+
+               // Crear el objeto de la carta
+               const nuevaCarta = {
+                 nombre: nombre,
+                 imagen: imagen,
+                 vida: vida,
+                 cara1: cara1,
+                 cara2: cara2,
+                 cara3: cara3
+               };
+
+               // Obtener las cartas almacenadas en LocalStorage
+               const cartasGuardadas = JSON.parse(localStorage.getItem("cartas")) || [];
+
+               // Agregar la nueva carta al array
+               cartasGuardadas.push(nuevaCarta);
+
+               // Guardar el array actualizado en LocalStorage
+               localStorage.setItem("cartas", JSON.stringify(cartasGuardadas));
+
+               // Limpiar el formulario
+               document.getElementById("miFormulario").reset();
+
+               // Preguntar al usuario si desea agregar más cartas o ver la galería
+               // Mostrar el cuadro de diálogo para confirmar si el usuario quiere agregar más cartas
+               const confirmacion = confirm("¿Desea agregar más cartas?");
+
+               // Verificar si el usuario seleccionó "Aceptar"
+               if (confirmacion) {
+                 // Redirigir a la página de formulario para agregar más cartas
+                 window.location.href = "./formulario.html";
+               } else {
+                 // Redirigir a la página principal donde se mostrarán las cartas existentes
+                 window.location.href = "/index.html";
+               }
+             });
+           </script>
+          </body>
+        </html>
